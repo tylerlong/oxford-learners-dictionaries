@@ -9,3 +9,11 @@ https://www.oxfordlearnersdictionaries.com
 yarn install
 yarn start
 ```
+
+
+## Release
+
+```
+yarn build
+GH_TOKEN=<GH_TOKEN> yarn release
+```
