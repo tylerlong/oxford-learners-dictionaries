@@ -2,11 +2,43 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "webpack --progress --colors"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
     "electron": "^4.1.0",
     "standard": "^12.0.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
     "yarn-upgrade-all": "^0.5.0"
+  },
+  "build": {
+    "appId": "oxford-learners-dictionaries.tylingsoft.com",
+    "productName": "Oxford Learners Dictionaries",
+    "files": [
+      "dist/**/*",
+      "!node_modules${/*}"
+    ],
+    "mac": {
+      "category": "public.app-category.education"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 128,
+          "y": 160
+        },
+        {
+          "x": 384,
+          "y": 160,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "compression": "maximum"
   }
 }
