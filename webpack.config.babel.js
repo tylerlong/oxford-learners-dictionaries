@@ -1,6 +1,6 @@
 const mainConfig = {
   target: 'electron-main',
-  mode: 'production',
+  mode: 'development',
   entry: {
     main: ['./main.js']
   },
