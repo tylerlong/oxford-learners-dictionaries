@@ -8,7 +8,7 @@
   "scripts": {
     "start": "electron .",
     "build": "webpack --progress --colors",
-    "release": "electron-builder build --mac",
+    "release": "electron-builder build --mac --win",
     "extract": "asar extract './dist/mac/Oxford Learners Dictionaries.app/Contents/Resources/app.asar' dist/app"
   },
   "repository": "git@github.com:tylerlong/oxford-learners-dictionaries.git",
