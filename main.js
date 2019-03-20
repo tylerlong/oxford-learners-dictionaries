@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, session } = require('electron')
+import { app, BrowserWindow, session } from 'electron'
+
+import { setApplicationMenu } from './menu'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -36,6 +38,7 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  setApplicationMenu()
   createWindow()
 
   // Ref: https://electronjs.org/docs/tutorial/security#6-define-a-content-security-policy
