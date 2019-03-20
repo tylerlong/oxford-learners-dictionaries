@@ -1,7 +1,16 @@
-// Modules to control application life and create native browser window
 import { app, BrowserWindow, session } from 'electron'
+import { autoUpdater } from 'electron-updater'
+import electronLog from 'electron-log'
 
 import { setApplicationMenu } from './menu'
+
+// check for updates
+electronLog.transports.file.level = 'info'
+autoUpdater.logger = electronLog
+autoUpdater.checkForUpdatesAndNotify()
+setInterval(() => {
+  autoUpdater.checkForUpdatesAndNotify()
+}, 3600000) // check for updates every hour
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

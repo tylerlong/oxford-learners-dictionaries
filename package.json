@@ -16,6 +16,10 @@
     "name": "Tyler Long",
     "email": "tyler4long@gmail.com"
   },
+  "dependencies": {
+    "electron-log": "^3.0.1",
+    "electron-updater": "^4.0.6"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",

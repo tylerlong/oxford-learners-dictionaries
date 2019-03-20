@@ -34,7 +34,6 @@ GH_TOKEN=<GH_TOKEN> yarn release
 
 ## Todo
 
-- auto upgrade
 - keyboard shortcut
 - menu bar icon
 - macOS application code signing
