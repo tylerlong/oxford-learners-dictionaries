@@ -21,3 +21,12 @@ GH_TOKEN=<GH_TOKEN> yarn release
 ```
 
 `GH_TOKEN` is your [GitHub Personal access token](https://github.com/settings/tokens).
+
+
+
+## Todo
+
+- auto upgrade
+- keyboard shortcut
+- menu bar icon
+- macOS application code signing
