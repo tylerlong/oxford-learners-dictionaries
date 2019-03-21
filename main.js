@@ -1,4 +1,4 @@
-import { app, BrowserWindow, session, shell } from 'electron'
+import { app, BrowserWindow, session, shell, Tray } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import electronLog from 'electron-log'
 
@@ -12,10 +12,7 @@ setInterval(() => {
   autoUpdater.checkForUpdatesAndNotify()
 }, 3600000) // check for updates every hour
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -38,12 +35,9 @@ function createWindow () {
     mainWindow.webContents.openDevTools()
   }
 
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
+  mainWindow.on('close', function (event) {
+    event.preventDefault()
+    mainWindow.hide()
   })
 
   mainWindow.webContents.on('new-window', (event, url) => {
@@ -52,16 +46,24 @@ function createWindow () {
   })
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+let tray
+function createTray () {
+  tray = new Tray('./tray@2x.png')
+  tray.on('click', () => {
+    mainWindow.show()
+    mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+  })
+}
+
 app.on('ready', () => {
   setApplicationMenu()
   createWindow()
+  createTray()
 
   // Ref: https://electronjs.org/docs/tutorial/security#6-define-a-content-security-policy
   session.defaultSession.webRequest.onHeadersReceived((details, handle) => {
     handle({
+      ...details,
       responseHeaders: {
         ...details.responseHeaders,
         'Content-Security-Policy': ["script-src 'self' 'unsafe-inline'"]
@@ -70,22 +72,7 @@ app.on('ready', () => {
   })
 })
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
-
 app.on('activate', function () {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
+  mainWindow.show()
+  mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
