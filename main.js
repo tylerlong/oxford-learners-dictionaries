@@ -29,6 +29,10 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL('https://www.oxfordlearnersdictionaries.com')
 
+  mainWindow.webContents.once('dom-ready', () => {
+    mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+  })
+
   // Open the DevTools.
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools()
