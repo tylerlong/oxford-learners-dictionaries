@@ -52,7 +52,9 @@ function createWindow () {
 
 let tray
 function createTray () {
-  tray = new Tray(nativeImage.createFromDataURL(trayIcon))
+  const iconImage = nativeImage.createEmpty()
+  iconImage.addRepresentation({ scaleFactor: 2.0, dataURL: trayIcon })
+  tray = new Tray(iconImage)
   tray.on('click', () => {
     mainWindow.show()
     mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
