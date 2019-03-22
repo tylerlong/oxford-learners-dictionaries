@@ -25,6 +25,7 @@ yarn start
 ## Release
 
 ```
+rm -rf dist
 yarn build -p
 GH_TOKEN=<GH_TOKEN> yarn release
 ```
@@ -35,5 +36,4 @@ GH_TOKEN=<GH_TOKEN> yarn release
 ## Todo
 
 - keyboard shortcut
-- menu bar icon
 - macOS application code signing
