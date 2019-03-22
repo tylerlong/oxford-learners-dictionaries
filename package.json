@@ -5,6 +5,7 @@
   "main": "dist/main.js",
   "description": "Oxford Learners Dictionaries",
   "license": "MIT",
+  "homepage": "https://github.com/tylerlong/oxford-learners-dictionaries",
   "scripts": {
     "start": "electron .",
     "build": "webpack --progress --colors",

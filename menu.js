@@ -45,7 +45,7 @@ const template = [
       {
         label: 'Learn More',
         click () {
-          shell.openExternal('https://github.com/tylerlong/ringcentral-webhook-consumer')
+          shell.openExternal(pkg.homepage)
         }
       }
     ]
