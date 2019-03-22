@@ -1,6 +1,7 @@
-import { app, BrowserWindow, session, shell, Tray } from 'electron'
+import { app, BrowserWindow, session, shell, Tray, nativeImage } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import electronLog from 'electron-log'
+import trayIcon from './tray@2x.png'
 
 import { setApplicationMenu } from './menu'
 
@@ -36,6 +37,9 @@ function createWindow () {
   }
 
   mainWindow.on('close', function (event) {
+    if (mainWindow.forceClose) {
+      return
+    }
     event.preventDefault()
     mainWindow.hide()
   })
@@ -48,7 +52,7 @@ function createWindow () {
 
 let tray
 function createTray () {
-  tray = new Tray('./tray@2x.png')
+  tray = new Tray(nativeImage.createFromDataURL(trayIcon))
   tray.on('click', () => {
     mainWindow.show()
     mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
@@ -75,4 +79,8 @@ app.on('ready', () => {
 app.on('activate', function () {
   mainWindow.show()
   mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+})
+
+app.on('before-quit', () => {
+  mainWindow.forceClose = true
 })
