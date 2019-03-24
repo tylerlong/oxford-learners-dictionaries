@@ -44,5 +44,5 @@ GH_TOKEN=<GH_TOKEN> yarn release
 
 ## Todo
 
-- keyboard shortcut
 - macOS application code signing
+- auto launch on startup
