@@ -7,6 +7,15 @@ https://www.oxfordlearnersdictionaries.com
 ### [Download](https://github.com/tylerlong/oxford-learners-dictionaries/releases)
 
 
+## Global Keyboard Shortcut
+
+
+Press `Alt+Shift+D` to active the app.
+
+Please note that, the app has to be running in background when you press this keyboard shortcut.
+It doesn't need to be in foreground or have focus, however.
+
+
 ---
 
 ### Below is for maintainers and contributors

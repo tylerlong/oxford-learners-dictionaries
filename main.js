@@ -1,4 +1,4 @@
-import { app, BrowserWindow, session, shell, Tray, nativeImage } from 'electron'
+import { app, BrowserWindow, session, shell, Tray, nativeImage, globalShortcut } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import electronLog from 'electron-log'
 import trayIcon from './tray@2x.png'
@@ -14,6 +14,10 @@ setInterval(() => {
 }, 3600000) // check for updates every hour
 
 let mainWindow
+const activate = () => {
+  mainWindow.show()
+  mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+}
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -56,8 +60,7 @@ function createTray () {
   iconImage.addRepresentation({ scaleFactor: 2.0, dataURL: trayIcon })
   tray = new Tray(iconImage)
   tray.on('click', () => {
-    mainWindow.show()
-    mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+    activate()
   })
 }
 
@@ -76,13 +79,20 @@ app.on('ready', () => {
       }
     })
   })
+
+  globalShortcut.register('Alt+Shift+D', () => {
+    activate()
+  })
 })
 
 app.on('activate', function () {
-  mainWindow.show()
-  mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+  activate()
 })
 
 app.on('before-quit', () => {
   mainWindow.forceClose = true
+})
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll()
 })
