@@ -42,9 +42,9 @@
     "appId": "oxford-learners-dictionaries.tylingsoft.com",
     "productName": "Oxford Learners Dictionaries",
     "files": [
-      "dist/main.js",
-      "dist/main.js.map",
-      "dist/index.html",
+      "dist/*.js",
+      "dist/*.js.map",
+      "dist/*.html",
       "dist/*.gif",
       "!node_modules${/*}"
     ],
