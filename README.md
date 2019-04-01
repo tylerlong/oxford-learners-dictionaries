@@ -36,6 +36,8 @@ yarn start
 ```
 rm -rf dist
 yarn build -p
+cp index.html dist/
+cp loading.gif dist/
 GH_TOKEN=<GH_TOKEN> yarn release
 ```
 
@@ -49,4 +51,3 @@ GH_TOKEN=<GH_TOKEN> yarn release
     - still waiting for clarification
 - auto launch on startup
 - Configuring yargs through package.json is deprecated and will be removed in the next major release, please use the JS API instead.
-- show spinner when loading new page

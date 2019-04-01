@@ -40,7 +40,7 @@ function createWindow () {
     opacity: 0.5,
     alwaysOnTop: true
   })
-  loadingWindow.loadURL(path.join('file://', __dirname, '..', 'index.html'))
+  loadingWindow.loadURL(path.join('file://', __dirname, 'index.html'))
 
   mainWindow.webContents.once('dom-ready', () => {
     mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
