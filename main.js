@@ -52,6 +52,10 @@ function createWindow () {
   mainWindow.webContents.on('did-finish-load', () => {
     loadingWindow.hide()
   })
+  mainWindow.on('move', () => {
+    const rect = mainWindow.getBounds()
+    loadingWindow.setPosition(rect.x + rect.width / 2 - 50, rect.y + rect.height / 2 - 50)
+  })
 
   // Open the DevTools.
   if (process.env.NODE_ENV === 'development') {
