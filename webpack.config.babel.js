@@ -1,3 +1,5 @@
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+
 const mainConfig = {
   target: 'electron-main',
   mode: 'development',
@@ -25,4 +27,37 @@ const mainConfig = {
   }
 }
 
-export default [mainConfig]
+const loadingConfig = {
+  target: 'web',
+  mode: 'development',
+  entry: {
+    index: './index.js'
+  },
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.(gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
+  ]
+}
+
+export default [mainConfig, loadingConfig]

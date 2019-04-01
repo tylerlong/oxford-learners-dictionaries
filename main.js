@@ -31,8 +31,8 @@ function createWindow () {
   mainWindow.loadURL('https://www.oxfordlearnersdictionaries.com')
 
   loadingWindow = new BrowserWindow({
-    width: 128,
-    height: 128,
+    width: 100,
+    height: 100,
     webPreferences: {
       nodeIntegration: false
     },

@@ -36,8 +36,6 @@ yarn start
 ```
 rm -rf dist
 yarn build -p
-cp index.html dist/
-cp loading.gif dist/
 GH_TOKEN=<GH_TOKEN> yarn release
 ```
 
