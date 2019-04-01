@@ -1,8 +1,9 @@
 import { app, BrowserWindow, session, shell, Tray, nativeImage, globalShortcut } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import electronLog from 'electron-log'
-import trayIcon from './tray@2x.png'
+import path from 'path'
 
+import trayIcon from './tray@2x.png'
 import { setApplicationMenu } from './menu'
 
 // check for updates
@@ -14,12 +15,12 @@ setInterval(() => {
 }, 3600000) // check for updates every hour
 
 let mainWindow
+let loadingWindow
 const activate = () => {
   mainWindow.show()
   mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
 }
 function createWindow () {
-  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 600,
     height: 800,
@@ -27,12 +28,29 @@ function createWindow () {
       nodeIntegration: false
     }
   })
-
-  // and load the index.html of the app.
   mainWindow.loadURL('https://www.oxfordlearnersdictionaries.com')
+
+  loadingWindow = new BrowserWindow({
+    width: 128,
+    height: 128,
+    webPreferences: {
+      nodeIntegration: false
+    },
+    frame: false,
+    opacity: 0.5,
+    alwaysOnTop: true
+  })
+  loadingWindow.loadURL(path.join('file://', __dirname, '..', 'index.html'))
 
   mainWindow.webContents.once('dom-ready', () => {
     mainWindow.webContents.executeJavaScript('document.getElementById("q").focus()')
+  })
+
+  mainWindow.webContents.on('will-navigate', () => {
+    loadingWindow.show()
+  })
+  mainWindow.webContents.on('did-finish-load', () => {
+    loadingWindow.hide()
   })
 
   // Open the DevTools.

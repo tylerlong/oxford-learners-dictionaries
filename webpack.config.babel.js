@@ -5,6 +5,9 @@ const mainConfig = {
     main: ['./main.js']
   },
   devtool: 'source-map',
+  node: {
+    __dirname: false // https://github.com/webpack/webpack/issues/2010#issuecomment-181256611
+  },
   module: {
     rules: [
       {
