@@ -54,7 +54,7 @@ function createWindow () {
   })
   mainWindow.on('move', () => {
     const rect = mainWindow.getBounds()
-    loadingWindow.setPosition(rect.x + rect.width / 2 - 50, rect.y + rect.height / 2 - 50)
+    loadingWindow.setPosition(Math.round(rect.x + rect.width / 2 - 50), Math.round(rect.y + rect.height / 2 - 50))
   })
 
   // Open the DevTools.
