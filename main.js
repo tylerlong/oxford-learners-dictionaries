@@ -6,6 +6,9 @@ import path from 'path'
 import trayIcon from './tray@2x.png'
 import { setApplicationMenu } from './menu'
 
+const LOADING_WINDOW_WIDTH = 100
+const LOADING_WINDOW_HEIGHT = 100
+
 // check for updates
 electronLog.transports.file.level = 'info'
 autoUpdater.logger = electronLog
@@ -31,8 +34,8 @@ function createWindow () {
   mainWindow.loadURL('https://www.oxfordlearnersdictionaries.com')
 
   loadingWindow = new BrowserWindow({
-    width: 100,
-    height: 100,
+    width: LOADING_WINDOW_WIDTH,
+    height: LOADING_WINDOW_HEIGHT,
     webPreferences: {
       nodeIntegration: false
     },
@@ -54,7 +57,12 @@ function createWindow () {
   })
   mainWindow.on('move', () => {
     const rect = mainWindow.getBounds()
-    loadingWindow.setPosition(Math.round(rect.x + rect.width / 2 - 50), Math.round(rect.y + rect.height / 2 - 50))
+    loadingWindow.setBounds({ 
+      x: Math.round(rect.x + rect.width / 2 - LOADING_WINDOW_WIDTH / 2), 
+      y: Math.round(rect.y + rect.height / 2 - LOADING_WINDOW_HEIGHT / 2),
+      width: LOADING_WINDOW_WIDTH,
+      height: LOADING_WINDOW_HEIGHT
+    })
   })
 
   // Open the DevTools.
